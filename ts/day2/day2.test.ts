@@ -46,6 +46,6 @@ Deno.test("Day 2 Puzzle 1", () => {
   assertEquals(countValidPasswords(testData, PasswordPolicy.SledRental), 2);
 });
 
-// Deno.test("Day 2 Puzzle 2", () => {
-//   assertEquals(countValidPasswords(testData, PasswordPolicy.TobogganRental), 2);
-// });
+Deno.test("Day 2 Puzzle 2", () => {
+  assertEquals(countValidPasswords(testData, PasswordPolicy.TobogganRental), 1);
+});
