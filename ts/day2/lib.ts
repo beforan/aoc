@@ -68,9 +68,8 @@ export const TobogganRentalPasswordValidator: PasswordValidator = (
   const char1 = password[pos1 - 1];
   const char2 = password[pos2 - 1];
 
-  // coerce the boolean expressions to numbers so we can bitwise XOR them
-  // and then coerce the result back to a boolean :\
-  return !!(+(char1 === char) ^ +(char2 === char));
+  // (char1 === char) XOR (char2 === char)
+  return char1 === char ? char2 !== char : char2 === char;
 };
 
 export const selectPasswordValidatorByPolicy = (policy: PasswordPolicy) => {
