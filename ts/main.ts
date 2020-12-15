@@ -1,22 +1,19 @@
-/** @module main Consider this a launcher for each completed day and puzzle */
-import * as Day1 from "./day1/day1.ts";
+/**
+ * @module main
+ * Dynamic launcher for Day and Puzzle combinations.
+ *
+ * - Expects to find `puzzle<n>.ts` modules in `day<n>/` folders.
+ * - Expects a parameterless `Solve()` export to run to solve that puzzle.
+ */
 
-// Add Days and Puzzles here
-const actions: ActionLookup = {
-  "1,1": Day1.Puzzle1,
-};
-
-type ActionLookup = {
-  [key: string]: () => Promise<void>;
-};
-
-// Launcher Runtime Plumbing
 const [day, puzzle] = Deno.args;
-const key = `${day},${puzzle}`;
 
-const notFound = () =>
-  console.log(
+try {
+  (await import(`./day${day}/puzzle${puzzle}.ts`)).Solve();
+} catch {
+  console.error(
     `Couldn't find the combination of Day ${day} and Puzzle ${puzzle}.`
   );
+}
 
-actions[key]?.() ?? notFound();
+export {};
