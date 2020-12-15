@@ -1,4 +1,4 @@
-import { countValidPasswords, TobogganRentalPasswordValidator } from "./lib.ts";
+import { countValidPasswords } from "./lib.ts";
 import { PasswordPolicy } from "./types.ts";
 
 const inputFile = "./day2/day2_input.txt";

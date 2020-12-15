@@ -20,6 +20,13 @@ export const parsePasswordLine = (line: string) => {
   };
 };
 
+export const getCharCount = (input: string, char: string) => {
+  if (char.length != 1) throw new Error(`char must be only one char: ${char}`);
+
+  const inverseCharCount = input.replaceAll(char, "").length;
+  return input.length - inverseCharCount;
+};
+
 /**
  * @private
  * Check validity of a `password` using the following criteria:
@@ -36,9 +43,7 @@ export const SledRentalPasswordValidator: PasswordValidator = (
   charMin,
   charMax
 ) => {
-  const inverseCharCount = password.replaceAll(char, "").length;
-  const charCount = password.length - inverseCharCount;
-
+  const charCount = getCharCount(password, char);
   return charMin <= charCount && charCount <= charMax;
 };
 
@@ -46,22 +51,26 @@ export const SledRentalPasswordValidator: PasswordValidator = (
  * @private
  * Check validity of a `password` using the following criteria:
  *
- * `char` must appear at least `charMin` times and no more than `charMax`.
+ * One of the specified positions must contain the validation character.
+ * Other occurrences of the character don't matter.
  * @param password The password to validate
- * @param char The restricted character
- * @param charMin Minimum required number of `char`
- * @param charMax Maximum acceptable number of `char`
+ * @param char The validation character
+ * @param pos1 a 1-indexed character position to validate
+ * @param pos2 a 1-indexed character position to validate
  */
 export const TobogganRentalPasswordValidator: PasswordValidator = (
   password,
   char,
-  charMin,
-  charMax
+  pos1,
+  pos2
 ) => {
-  const inverseCharCount = password.replaceAll(char, "").length;
-  const charCount = password.length - inverseCharCount;
+  // pos is 1-indexed
+  const char1 = password[pos1 - 1];
+  const char2 = password[pos2 - 1];
 
-  return charMin <= charCount && charCount <= charMax;
+  // coerce the boolean expressions to numbers so we can bitwise XOR them
+  // and then coerce the result back to a boolean :\
+  return !!(+(char1 === char) ^ +(char2 === char));
 };
 
 export const selectPasswordValidatorByPolicy = (policy: PasswordPolicy) => {
@@ -81,7 +90,7 @@ export const countValidPasswords = (
 ) => {
   const isValidPassword = selectPasswordValidatorByPolicy(policy);
 
-  lines.reduce((validCount, line) => {
+  return lines.reduce((validCount, line) => {
     const { numbers, char, password } = parsePasswordLine(line);
     const [a, b] = parseDelimitedDigits(numbers);
 

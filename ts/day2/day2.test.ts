@@ -26,6 +26,7 @@ Deno.test("Invalid Range throws", () => {
 
 Deno.test("SledRentalPassword is true for valid", () => {
   assert(SledRentalPasswordValidator("abcde", "a", 1, 3));
+  assert(SledRentalPasswordValidator("ccccccccc", "c", 2, 9));
 });
 
 Deno.test("SledRentalPassword is false for invalid", () => {
@@ -38,6 +39,7 @@ Deno.test("TobogganRentalPassword is true for valid", () => {
 
 Deno.test("TobogganRentalPassword is false for invalid", () => {
   assert(!TobogganRentalPasswordValidator("cdefg", "b", 1, 3));
+  assert(!TobogganRentalPasswordValidator("ccccccccc", "c", 2, 9));
 });
 
 Deno.test("Day 2 Puzzle 1", () => {
