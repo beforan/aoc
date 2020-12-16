@@ -54,7 +54,7 @@ export const isValidEcl = (ecl: string) => validEyeColors.includes(ecl);
 export const isValidPid = (pid: string) => isNDigits(pid, 9);
 
 /** hashmap to lookup validators by field key */
-export const validatorLookup = {
+export const validatorLookup: { [key: string]: (value: string) => boolean } = {
   byr: isValidByr,
   iyr: isValidIyr,
   eyr: isValidEyr,

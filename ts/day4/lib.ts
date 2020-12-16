@@ -2,6 +2,7 @@ import {
   looseModeOptionalPassportFields,
   requiredPassportFields,
 } from "./constants.ts";
+import { validatorLookup } from "./validators.ts";
 
 export const XplatDoubleNewLine = /\r?\n\r?\n/;
 
@@ -24,14 +25,41 @@ export const parsePassport = (passport: string) => {
 
 export const isPassportValid = (
   passport: { [key: string]: string },
-  looseMode = false
+  looseMode = false,
+  validateContent = false
 ) => {
   for (let key of requiredPassportFields) {
     // if this field is ok in "loose mode", don't bother checking
     if (looseMode && looseModeOptionalPassportFields.includes(key)) continue;
 
-    // early exit if invalid
+    // we early exit if invalid
+
+    // check required key is present
     if (!passport[key]) return false;
+
+    // check required key is valid
+    if (validateContent) {
+      console.log(key, passport[key]);
+      return validatorLookup[key](passport[key]);
+    }
   }
   return true;
 };
+
+export const validatePassports = (
+  passports: string[],
+  looseMode = false,
+  validateContent = false
+) =>
+  passports.map((x) =>
+    isPassportValid(parsePassport(x), looseMode, validateContent)
+  );
+
+export const countValid = (validationResults: boolean[]) =>
+  validationResults.filter((x) => !!x).length;
+
+export const countValidPassports = (
+  passports: string[],
+  looseMode = false,
+  validateContent = false
+) => countValid(validatePassports(passports, looseMode, validateContent));
