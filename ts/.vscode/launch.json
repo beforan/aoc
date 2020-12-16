@@ -12,7 +12,10 @@
       "runtimeArgs": [
         "run",
         "--inspect-brk",
-        "./src/main.ts"
+        "--allow-read",
+        "./main.ts",
+        "3",
+        "1"
       ],
       "attachSimplePort": 9229,
       "console": "integratedTerminal"
@@ -22,10 +25,7 @@
       "request": "launch",
       "name": "Run Tests",
       "runtimeExecutable": "deno",
-      "runtimeArgs": [
-        "test",
-        "--inspect-brk"
-      ],
+      "runtimeArgs": ["test", "--inspect-brk"],
       "attachSimplePort": 9229,
       "console": "integratedTerminal"
     },
@@ -34,11 +34,7 @@
       "request": "launch",
       "name": "Debug Current Test File",
       "runtimeExecutable": "deno",
-      "runtimeArgs": [
-        "test",
-        "${file}",
-        "--inspect-brk"
-      ],
+      "runtimeArgs": ["test", "${file}", "--inspect-brk"],
       "attachSimplePort": 9229,
       "console": "integratedTerminal"
     },
