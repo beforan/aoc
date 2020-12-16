@@ -14,7 +14,7 @@
         "--inspect-brk",
         "--allow-read",
         "./main.ts",
-        "3",
+        "1",
         "1"
       ],
       "attachSimplePort": 9229,
