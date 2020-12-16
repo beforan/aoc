@@ -1,5 +1,7 @@
+export const XplatNewLine = /\r?\n/;
+
 export const splitTextFileLines = (fileContent: string) =>
-  fileContent.split(/\r?\n/); // should be xplat
+  fileContent.split(XplatNewLine);
 
 export const readAndSplitInputFile = async (
   day: number,

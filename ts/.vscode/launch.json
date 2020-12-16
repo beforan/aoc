@@ -34,7 +34,7 @@
       "request": "launch",
       "name": "Debug Current Test File",
       "runtimeExecutable": "deno",
-      "runtimeArgs": ["test", "${file}", "--inspect-brk"],
+      "runtimeArgs": ["test", "${file}", "--inspect-brk", "--allow-read"],
       "attachSimplePort": 9229,
       "console": "integratedTerminal"
     },
