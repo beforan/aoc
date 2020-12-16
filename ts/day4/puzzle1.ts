@@ -10,7 +10,7 @@ export const countValidPassports = (passports: string[], looseMode = false) =>
   countValid(validatePassports(passports, looseMode));
 
 export const Solve = async () => {
-  const file = await Deno.readTextFile("./day4/day4_input_test.txt");
+  const file = await Deno.readTextFile("./day4/day4_input.txt");
   const passports = doubleNewLineSplit(file);
   console.log(countValidPassports(passports, true));
 };

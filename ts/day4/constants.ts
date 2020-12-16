@@ -10,3 +10,5 @@ export const requiredPassportFields = [
 ];
 
 export const looseModeOptionalPassportFields = ["cid"];
+
+export const validEyeColors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
