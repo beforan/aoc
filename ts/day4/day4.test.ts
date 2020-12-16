@@ -6,6 +6,7 @@ import {
   splitPassportFields,
 } from "./lib.ts";
 import { assertEquals } from "https://deno.land/std@0.81.0/testing/asserts.ts";
+import { countValidPassports } from "./puzzle1.ts";
 
 const testFile = await Deno.readTextFile("./day4/day4_input_test.txt");
 
@@ -45,6 +46,16 @@ const invalidPassport = {
   byr: "1929",
 };
 
+const loosePassport = {
+  hcl: "#ae17e1",
+  iyr: "2013",
+  eyr: "2024",
+  ecl: "brn",
+  pid: "760753108",
+  byr: "1931",
+  hgt: "179cm",
+};
+
 Deno.test("Split on double new lines - count", async () => {
   const expectedCount = 4;
 
@@ -81,4 +92,20 @@ Deno.test("Valid Passport", () => {
 
 Deno.test("Invalid Passport", () => {
   assertEquals(isPassportValid(invalidPassport), false);
+});
+
+
+Deno.test("Loose Passport fails strict mode", () => {
+    assertEquals(isPassportValid(loosePassport), false);
+  });
+
+Deno.test("Loose Passport passes loose mode", () => {
+    assertEquals(isPassportValid(loosePassport, true), true);
+  });
+
+Deno.test("Day 4 Puzzle 1", () => {
+  const expected = 2;
+  const actual = countValidPassports(testLines, true);
+
+  assertEquals(actual, expected);
 });
