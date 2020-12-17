@@ -1,5 +1,4 @@
 import {
-  doubleNewLineSplit,
   isPassportValid,
   parsePassport,
   parsePassportField,
@@ -10,7 +9,7 @@ import {
   assert,
   assertEquals,
 } from "https://deno.land/std@0.81.0/testing/asserts.ts";
-import { isValidPid } from "./validators.ts";
+import { doubleNewLineSplit } from "../lib/file-io.ts";
 
 const testFile = await Deno.readTextFile("./day4/day4_input_test.txt");
 

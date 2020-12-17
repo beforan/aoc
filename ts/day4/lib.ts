@@ -4,11 +4,6 @@ import {
 } from "./constants.ts";
 import { validatorLookup } from "./validators.ts";
 
-export const XplatDoubleNewLine = /\r?\n\r?\n/;
-
-export const doubleNewLineSplit = (input: string) =>
-  input.split(XplatDoubleNewLine);
-
 export const splitPassportFields = (passport: string) =>
   passport.split(/(?:\r?\n)|\s/);
 

@@ -1,8 +1,8 @@
-import { readAndSplitInputFile } from "../lib/file-io.ts";
+import { readInputLines } from "../lib/file-io.ts";
 import { parseBoardingPass } from "./lib.ts";
 
 export const Solve = async () => {
-  const lines = await readAndSplitInputFile(5);
+  const lines = await readInputLines(5);
   const seatIds = lines.map((pass) => parseBoardingPass(pass).seatId);
   const min = Math.min(...seatIds);
 

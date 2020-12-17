@@ -1,4 +1,4 @@
-import { readAndSplitInputFile } from "../lib/file-io.ts";
+import { readInputLines } from "../lib/file-io.ts";
 import { tobogganSlopes } from "./constants.ts";
 import { countTreesOnRoute } from "./lib.ts";
 
@@ -10,6 +10,6 @@ export const allSlopesTreeCountProduct = (lines: string[]) => {
 };
 
 export const Solve = async () => {
-  const lines = await readAndSplitInputFile(3);
+  const lines = await readInputLines(3);
   console.log(allSlopesTreeCountProduct(lines));
 };
