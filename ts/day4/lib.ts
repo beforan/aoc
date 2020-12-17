@@ -28,7 +28,7 @@ export const isPassportValid = (
   looseMode = false,
   validateContent = false
 ) => {
-  for (let key of requiredPassportFields) {
+  for (const key of requiredPassportFields) {
     // if this field is ok in "loose mode", don't bother checking
     if (looseMode && looseModeOptionalPassportFields.includes(key)) continue;
 
@@ -39,8 +39,7 @@ export const isPassportValid = (
 
     // check required key is valid
     if (validateContent) {
-      console.log(key, passport[key]);
-      return validatorLookup[key](passport[key]);
+      if (!validatorLookup[key](passport[key])) return false;
     }
   }
   return true;
