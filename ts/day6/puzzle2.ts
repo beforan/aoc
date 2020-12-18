@@ -1,5 +1,5 @@
 import { readInputGroups } from "../lib/file-io.ts";
-import { sumGroupDistinctValues, sumGroupUbiquitousValues } from "./lib.ts";
+import { sumGroupUbiquitousValues } from "./lib.ts";
 
 export const Solve = async () => {
   const groups = await readInputGroups(6);
