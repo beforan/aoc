@@ -1,20 +1,22 @@
 namespace Day1
 
 module Puzzle1 =
-    type CheckIncreaseAccumulator =
-        { FirstTime: bool
-          Last: int
-          Count: int }
+
+    type CheckIncreaseState =
+        { FirstTime: bool;          Last: int;          Count: int }
 
     let checkIncrease state value =
-        if not state.FirstTime && value > state.Last then
-            { Last = value
-              Count = state.Count + 1
-              FirstTime = false }
-        else
+        let isIncrease =
+            not state.FirstTime && value > state.Last
+
+        let newState =
             { state with
-                Last = value
-                FirstTime = false }
+                FirstTime = false
+                Last = value }
+
+        match newState with
+        | x when isIncrease -> { x with Count = x.Count + 1 }
+        | x -> x
 
     let countIncreases input =
         (List.fold
@@ -25,8 +27,20 @@ module Puzzle1 =
             input)
             .Count
 
-    let Solve () =
-        (countIncreases (Helpers.Harness.readInputFile 1))
+    let solve input =
+        countIncreases input
 
 module Puzzle2 =
-    let staggeredSum x = x
+    let staggeredSum input n =
+        (List.fold
+            (fun (sums: list<int>) value ->
+                let l = sums[..^(n-1)]
+                let m = List.map
+                            (fun x -> x + value)
+                            sums[^(n-2)..]
+                l @ m @ [value])
+            []
+            input)[..^(n-1)]
+
+    let solve input =
+        Puzzle1.countIncreases (staggeredSum input 3)

@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "55e865a2-3a2f-45b8-9e79-0ccd0cce9dba": {
+      "ProjectGuid": "55e865a2-3a2f-45b8-9e79-0ccd0cce9dba",
+      "DisplayName": "Aoc.Tests",
+      "ColorIndex": 0
+    },
+    "a718f59b-f89c-4fb6-90e7-53d653415e0c": {
+      "ProjectGuid": "a718f59b-f89c-4fb6-90e7-53d653415e0c",
+      "DisplayName": "Aoc",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
